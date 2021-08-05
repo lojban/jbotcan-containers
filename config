@@ -1,0 +1,2 @@
+service=jbotcan
+pod_args='-p 14080:14080'

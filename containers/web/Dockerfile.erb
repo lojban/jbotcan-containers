@@ -1,0 +1,26 @@
+<%= "\n"*30 %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+<%= "# YOU ARE IN THE WRONG PLACE use the ERB file" %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+
+FROM fedora:31
+
+RUN dnf -y install --best --allowerasing httpd findutils curl wget w3m vim vim-minimal procps-ng psutils less
+RUN yum clean all
+
+RUN rm /etc/httpd/conf.d/welcome.conf
+
+# Make the web user match the userid of jbotcan; makes things way easier
+RUN usermod -u 1085 apache
+RUN groupmod -g 1085 apache
+RUN find / -xdev -user 48 -print0 | xargs -0 chown apache
+RUN find / -xdev -group 48 -print0 | xargs -0 chgrp apache
+
+# Running rootless means no port 80 *in* the container
+RUN sed -i 's/^Listen 80$/Listen 14080/' /etc/httpd/conf/httpd.conf
+
+# Put the site http config in place
+COPY misc/httpd.conf /etc/httpd/conf.d/jbotcan.conf
+
+# We're really, actually running as 1085
+RUN find /etc/http* /var/log/http* -print0 | xargs -0 chown apache:apache

@@ -1,0 +1,6 @@
+description="static jbotcan's web container"
+needs_network=true
+name=web
+version=1
+run_args='-v /home/spjbotcan/jbotcan/containers/web/data:/var/www/html'
+run_program='/usr/sbin/httpd -DFOREGROUND'
