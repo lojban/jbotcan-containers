@@ -1,2 +1,3 @@
 service=jbotcan
-pod_args='-p 14080:14080'
+web_port=14080
+pod_args="-p $web_port:$web_port"

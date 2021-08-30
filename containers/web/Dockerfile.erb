@@ -17,7 +17,7 @@ RUN find / -xdev -user 48 -print0 | xargs -0 chown apache
 RUN find / -xdev -group 48 -print0 | xargs -0 chgrp apache
 
 # Running rootless means no port 80 *in* the container
-RUN sed -i 's/^Listen 80$/Listen 14080/' /etc/httpd/conf/httpd.conf
+RUN sed -i 's/^Listen 80$/Listen <%= web_port %>/' /etc/httpd/conf/httpd.conf
 
 # Put the site http config in place
 COPY misc/httpd.conf /etc/httpd/conf.d/jbotcan.conf
