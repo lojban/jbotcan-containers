@@ -1,3 +1,3 @@
-service=jbotcan
+bundle=jbotcan
 web_port=14080
 pod_args="-p $web_port:$web_port"
