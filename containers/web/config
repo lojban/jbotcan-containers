@@ -3,5 +3,5 @@ needs_network=true
 name=web
 version=1
 # -t is required for the logs pointing to /dev/stdout to work with SELinux
-run_args='-t -v /home/spjbotcan/jbotcan/containers/web/data:/var/www/html'
+run_args='-t -v /home/spjbotcan/jbotcan/containers/web/data:/var/www/html -v /home/spjbotcan/jbotcan/containers/web/data-archive:/var/www/html-archive'
 run_program='/usr/sbin/httpd -DFOREGROUND'
